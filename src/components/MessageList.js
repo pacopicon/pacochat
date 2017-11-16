@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Message from './Message';
-import style from './style';
+import '../styles/main.css';
 
 class MessageList extends Component {
   render() {
@@ -12,7 +12,7 @@ class MessageList extends Component {
       )
     })
     return (
-      <div style={ style.messageList }>
+      <div className="messageList">
         { messageNodes }
       </div>
     )

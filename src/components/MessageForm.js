@@ -22,7 +22,7 @@ class MessageForm extends Component {
   }
   render() {
     return (
-      <form style={ style.messageForm } onSubmit={ this.handleSubmit }>
+      <form className="messageForm" onSubmit={ this.handleSubmit }>
         <input
           type='text'
           placeholder='Your name...'

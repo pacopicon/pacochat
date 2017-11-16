@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
 import DATA from '../data';
-import style from './style';
 import '../styles/main.css';
 
 class MessageBox extends Component {

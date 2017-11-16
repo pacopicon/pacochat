@@ -5,22 +5,31 @@ const slug = require('slugs'); // helps make URL-friendly for our slugs
 // const uuidv4 = require('uuid/v4');
 // uuidv4(); 
 
+// const messageSchema = new mongoose.Schema({
+//   body: {
+//     type: String,
+//     trim: true,
+//     required: 'Enter a message',
+
+//   },
+//   userId: {
+//     type: String,
+//   },
+//   date: {
+//     type: Date,
+//     default: Date.now
+//   },
+//   roomName: {
+//     type: String
+//   }
+// });
+
 const messageSchema = new mongoose.Schema({
   body: {
     type: String,
     trim: true,
     required: 'Enter a message',
 
-  },
-  userId: {
-    type: String,
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  },
-  roomName: {
-    type: String
   }
 });
 
@@ -30,7 +39,7 @@ messageSchema.pre('save', function(next) {
     return; // stop this function from running
     // or return next();
   }
-  this.slug = slug(this.name);
+  // this.slug = slug(this.name);
   next();
   // TODO make more resilient so slugs are unique
 });

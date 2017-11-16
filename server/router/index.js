@@ -11,15 +11,15 @@ const catchErrors = (fn) => {
 };
 
 router.get('/', (req, res) => {
-	res.send("Hi Paco, the server is running")
+	res.json({message: "Hi Paco, the server is running"})
 });
 // router.get('/', catchErrors(messageController.getMessages));
 router.get('/messages', catchErrors(messageController.getMessages));
 router.get('/add', messageController.addMessage);
 
-router.post('/add', catchErrors(messageController.createMessage));
+router.post('/addMessage', catchErrors(messageController.createMessage));
 
-router.post('/add/:id', catchErrors(messageController.updateMessage));
+router.post('/addMessage/:id', catchErrors(messageController.updateMessage));
 router.get('/messages/:id/edit', catchErrors(messageController.editMessage));
 
 // even before we get to the routes, App.js 'uses' a whole bunch of middleware functionality
