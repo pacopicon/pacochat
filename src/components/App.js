@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
-import './App.css';
-import address from '../server/server-address.js'
+import '../styles/main.css';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      messages: {}
+      messages: []
     }
   }
 
   componentDidMount() {
-    var http = `${address}/messages`
-    fetch(http)
-    .then(response => {
-      return response.json()
-      .then(json => {
-        console.log('SUCCEEDED!!!: ', json)
-        this.setState({
-          messages: json 
-        })
-      })
-      .catch(error => {
-        console.log('failed to get messages: ', error)
-      })
-    })
+    // the http var (which == `address/{port #}`) below is defined in server/server-address.js, a file restricted to all files in src.  So we must hardcode in the meantime.
+    // var address = `localhost:7777`
+    // var http = `${address}/messages`
+    // fetch(http)
+    // .then(response => {
+    //   return response.json()
+    //   .then(json => {
+    //     console.log('SUCCEEDED!!!: ', json)
+    //     this.setState({
+    //       messages: json 
+    //     })
+    //   })
+    //   .catch(error => {
+    //     console.log('failed to get messages: ', error)
+    //   })
+    // })
   }
 
   handleChange(e) {

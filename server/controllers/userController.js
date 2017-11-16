@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User'); // we only need to reference this once b/c mongoose makes use of the singleton (in start.js) where the model is required only once
 
-exports.homePage = (req, res) => {
-  console.log(req.name); // req.name is still 'Paco'
-  res.render('index');
-}
+// exports.homePage = (req, res) => {
+//   console.log(req.name); // req.name is still 'Paco'
+//   res.render('index');
+// }
 
 exports.addUser = (req, res) => {
-  res.render('editUser', { title: 'Add User' });
+  res.json({ title: 'Add User' });
 }
 
 exports.createUser = async (req, res) => {
@@ -21,7 +21,7 @@ exports.createUser = async (req, res) => {
 exports.getUsers = async (req, res) => {
   // Query the db for a list of all stores
   const users = await User.find();
-  res.render('users', { title: 'Users', users });
+  res.json({ title: 'Users', users });
   // same as: res.render('stores', { title: 'Stores', stores: stores });
 }
 
@@ -32,7 +32,7 @@ exports.editUser = async (req, res) => {
   // res.json(user);  use this to log the json right on the browser
   // 2. confirm they are the owner of the user
   // 3. render out the edit form so user can update user
-  res.render('editUser', { title: `Edit ${user.body}`, user })
+  res.json({ title: `Edit ${user.body}`, user })
   // same as: res.render('edituser', { title: `Edit ${user.name}`, user: user })
 }
 // BTW, no harm if you tag a function as async if you're not really sure it needs it.

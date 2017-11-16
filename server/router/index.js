@@ -10,7 +10,10 @@ const catchErrors = (fn) => {
   };
 };
 
-router.get('/', catchErrors(messageController.getMessages));
+router.get('/', (req, res) => {
+	res.send("Hi Paco, the server is running")
+});
+// router.get('/', catchErrors(messageController.getMessages));
 router.get('/messages', catchErrors(messageController.getMessages));
 router.get('/add', messageController.addMessage);
 

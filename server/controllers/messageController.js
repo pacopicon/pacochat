@@ -3,11 +3,11 @@ const Message = mongoose.model('Message'); // we only need to reference this onc
 
 exports.homePage = (req, res) => {
   console.log(req.name); // req.name is still 'Paco'
-  res.render('index');
+  res.json({message: 'Hi Paco, this is the homePage'});
 }
 
 exports.addMessage = (req, res) => {
-  res.render('editMessage', { title: 'Add Message' });
+  res.json({ title: 'Add Message' });
 }
 
 exports.createMessage = async (req, res) => {
@@ -21,7 +21,7 @@ exports.createMessage = async (req, res) => {
 exports.getMessages = async (req, res) => {
   // Query the db for a list of all stores
   const messages = await Message.find();
-  res.render('messages', { title: 'Messages', messages });
+  res.json({ title: 'Messages', messages });
   // same as: res.render('stores', { title: 'Stores', stores: stores });
 }
 
@@ -32,7 +32,7 @@ exports.editMessage = async (req, res) => {
   // res.json(message);  use this to log the json right on the browser
   // 2. confirm they are the owner of the message
   // 3. render out the edit form so user can update message
-  res.render('editMessage', { title: `Edit ${message.body}`, message })
+  res.json({ title: `Edit ${message.body}`, message })
   // same as: res.render('editmessage', { title: `Edit ${message.name}`, message: message })
 }
 // BTW, no harm if you tag a function as async if you're not really sure it needs it.

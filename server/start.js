@@ -26,13 +26,17 @@ require('./models/Message');
 
 // Start our app
 const app = require('./app');
+// const srcpath = require('./app').srcpath;
 
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-
+// app.get("*",function(req,res){   
+//     res.sendFile(srcpath +'/index.html');  
+// })
 
 
 app.set('port', process.env.PORT || 7777);
 const server = app.listen(app.get('port'), () => {
   console.log(`Hi Paco, express is running on PORT ${server.address().port}`);
 });
+
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
