@@ -11,11 +11,11 @@ exports.addMessage = (req, res) => {
 }
 
 exports.createMessage = async (req, res) => {
-  // const store = new Store(req.body);
-  // await store.save(); // since we need the slug from the store (store.slug) that is auto-generated only after it saves (b/c we want to redirect user to that specific store), we need a variable that stands in for the already-saved store.  See below:
+  // const message = new Message(req.body);
+  // await message.save(); // since we need the slug from the message (message.slug) that is auto-generated only after it saves (b/c we want to redirect user to that specific message), we need a variable that stands in for the already-saved message.  See below:
   const message = await (new Message(req.body)).save();
   // console.log('Save has been promised')
-  res.redirect(`/message/${message.slug}`);
+  // res.redirect(`/message/${message.slug}`);
 };
 
 exports.getMessages = async (req, res) => {
@@ -29,25 +29,25 @@ exports.editMessage = async (req, res) => {
   // 1. find the store given the ID
   const message = await Message.findOne({ _id: req.params.id });
   // note: findOne is a MongoDB function.
-  // res.json(store);  use this to log the json right on the browser
-  // 2. confirm they are the owner of the store
-  // 3. render out the edit form so user can update store
+  // res.json(message);  use this to log the json right on the browser
+  // 2. confirm they are the owner of the message
+  // 3. render out the edit form so user can update message
   res.render('editMessage', { title: `Edit ${message.body}`, message })
-  // same as: res.render('editStore', { title: `Edit ${store.name}`, store: store })
+  // same as: res.render('editmessage', { title: `Edit ${message.name}`, message: message })
 }
 // BTW, no harm if you tag a function as async if you're not really sure it needs it.
 
 exports.updateMessage = async (req, res) => {
   // set the location data to be a point.
-  req.body.location.type = 'Point'
-  // find and update the store
+  // req.body.location.type = 'Point'
+  // find and update the message
   const message = await Message.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true, // return the new store instead of the old one
-    runValidators: true // the validatorss are those options inside storeSchema in Store.js, such as {trim: true} and {required: 'Please enter a store name!'}.  We still want these options active when editing the store, otherwise one could edit out the name of the store.
+    new: true, // return the new message instead of the old one
+    runValidators: true // the validatorss are those options inside messageSchema in message.js, such as {trim: true} and {required: 'Please enter a message name!'}.  We still want these options active when editing the message, otherwise one could edit out the name of the message.
   }).exec(); // this runs the query
-  res.redirect(`/messages/${message._id}/edit`);
+  // res.redirect(`/messages/${message._id}/edit`);
   // findOneAndUpdate() is a MongoDB function that allows us to query a piece of data from the DB and update it in one fell swoop.
-  // redirect user to store and tell her it worked
+  // redirect user to message and tell her it worked
 }
 
 // notes:

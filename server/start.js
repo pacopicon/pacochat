@@ -19,6 +19,8 @@ mongoose.connection.on('error', (err) => {
 
 
 // models
+require('./models/User');
+require('./models/Room');
 require('./models/Message');
 
 
@@ -32,5 +34,5 @@ const io = require('socket.io')(http);
 
 app.set('port', process.env.PORT || 7777);
 const server = app.listen(app.get('port'), () => {
-  console.log(`Express running → PORT ${server.address().port}`);
+  console.log(`Hi Paco, express is running on PORT ${server.address().port}`);
 });
