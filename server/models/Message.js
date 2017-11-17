@@ -33,15 +33,15 @@ const messageSchema = new mongoose.Schema({
   }
 });
 
-messageSchema.pre('save', function(next) {
-  if(!this.isModified('body')) {
-    next(); // skip it
-    return; // stop this function from running
-    // or return next();
-  }
-  // this.slug = slug(this.name);
-  next();
-  // TODO make more resilient so slugs are unique
-});
+// messageSchema.pre('save', function(next) {
+//   if(!this.isModified('body')) {
+//     next(); // skip it
+//     return; // stop this function from running
+//     // or return next();
+//   }
+//   // this.slug = slug(this.name);
+//   next();
+//   // TODO make more resilient so slugs are unique
+// });
 
 module.exports = mongoose.model('Message', messageSchema);
