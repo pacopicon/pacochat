@@ -16,13 +16,13 @@ exports.createMessage = async (req, res) => {
   // await message.save(); // since we need the slug from the message (message.slug) that is auto-generated only after it saves (b/c we want to redirect user to that specific message), we need a variable that stands in for the already-saved message.  See below:
   const message = await (new Message(req.body)).save();
   console.log('Save has been promised')
-  message.save((err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.json({message: 'message successfully added!'})
-    }
-  })
+  // message.save((err) => {
+  //   if (err) {
+  //     res.send(err);
+  //   } else {
+  //     res.json({message: 'message successfully added!'})
+  //   }
+  // })
   // res.redirect(`/message/${message.slug}`);
 };
 

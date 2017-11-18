@@ -54,7 +54,7 @@ router.get('/', (req, res) => {
 
 // router.get('/', catchErrors(messageController.getMessages));
 router.get('/messages', catchErrors(messageController.getMessages));
-router.get('/add', messageController.addMessage);
+router.get('/add', messageController.addMessage); // this usually renders a Templating engine view (The "add message" form page)
 
 router.post('/addMessage', catchErrors(messageController.createMessage));
 
