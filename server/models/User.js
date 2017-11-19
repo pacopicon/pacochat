@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise; // 'global' in the back end is analogous to 'window' in the front end
 
+const uuidv4 = require('uuid/v4'); // for testing 
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -10,7 +12,8 @@ const userSchema = new mongoose.Schema({
   },
   userId: {
     type: String,
-  }
+    default: uuidv4(),
+  },
 });
 
 // userSchema.pre('save', function(next) {

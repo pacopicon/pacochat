@@ -1,28 +1,14 @@
 const mongoose = require('mongoose');
 const Room = mongoose.model('Room'); // we only need to reference this once b/c mongoose makes use of the singleton (in start.js) where the model is required only once
 
-// exports.homePage = (req, res) => {
-//   console.log(req.name); // req.name is still 'Paco'
-//   res.render('index');
-// }
-
-exports.addRoom = (req, res) => {
-  res.json({ title: 'Add Room' });
-}
-
 exports.createRoom = async (req, res) => {
-  // const room = new Room(req.body);
-  // await room.save(); // since we need the slug from the room (room.slug) that is auto-generated only after it saves (b/c we want to redirect user to that specific room), we need a variable that stands in for the already-saved room.  See below:
   const room = await (new Room(req.body)).save();
-  // console.log('Save has been promised')
-  res.redirect(`/room/${room.slug}`);
+  // res.redirect(`/room/${room.slug}`);
 };
 
 exports.getRooms = async (req, res) => {
-  // Query the db for a list of all rooms
   const rooms = await Room.find();
   res.json({ title: 'Rooms', rooms });
-  // same as: res.render('rooms', { title: 'Rooms', rooms: rooms });
 }
 
 exports.editRoom = async (req, res) => {

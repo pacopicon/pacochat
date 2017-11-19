@@ -13,15 +13,15 @@ const roomSchema = new mongoose.Schema({
   }
 });
 
-roomSchema.pre('save', function(next) {
-  if(!this.isModified('body')) {
-    next(); // skip it
-    return; // stop this function from running
-    // or return next();
-  }
-  this.slug = slug(this.name);
-  next();
-  // TODO make more resilient so slugs are unique
-});
+// roomSchema.pre('save', function(next) {
+//   if(!this.isModified('body')) {
+//     next(); // skip it
+//     return; // stop this function from running
+//     // or return next();
+//   }
+//   this.slug = slug(this.name);
+//   next();
+//   // TODO make more resilient so slugs are unique
+// });
 
 module.exports = mongoose.model('Room', roomSchema);

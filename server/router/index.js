@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const messageController = require('../controllers/messageController')
+const roomController = require('../controllers/roomController')
+const userController = require('../controllers/userController')
 
 // const { catchErrors } = require('../handlers/errorHandlers')
 
@@ -14,53 +16,23 @@ router.get('/', (req, res) => {
 	res.json({message: "Hi Paco, the api is running"})
 });
 
-// var mongoose = require('mongoose');
-// var Schema = mongoose.Schema
-
-// var TestSchema = new Schema({
-//   author: String,
-//   text: String
-// })
-
-// var Test = mongoose.model('Test', TestSchema);
-
-//   //retrieve all tests from the database
-//  router.get('/tests', (req, res) => {
-//     //looks at our Test Schema
-//     Test.find((req, res) => {
-//       if (err)
-//         res.send(err);
-//       //responds with a json object of our database tests.
-//       res.json(tests)
-//     });
-//   })
-//   //post new test to the database
-//  router.post('/tests', (req, res) => {
-//     var Test = new Test();
-//     //body parser lets us use the req.body
-//     test.author = req.body.author;
-//     test.text = req.body.text;
-
-//     test.save(function(err) {
-//       if (err)
-//         res.send(err);
-//       res.json({ message: 'Test-message successfully added!' });
-//     });
-//   });
-
-
-
-
-
-// router.get('/', catchErrors(messageController.getMessages));
 router.get('/messages', catchErrors(messageController.getMessages));
-router.get('/add', messageController.addMessage); // this usually renders a Templating engine view (The "add message" form page)
-
 router.post('/addMessage', catchErrors(messageController.createMessage));
 
 router.post('/addMessage/:id', catchErrors(messageController.updateMessage));
 router.get('/messages/:id/edit', catchErrors(messageController.editMessage));
 
-// even before we get to the routes, App.js 'uses' a whole bunch of middleware functionality
+router.get('/rooms', catchErrors(roomController.getRooms));
+router.post('/addRoom', catchErrors(roomController.createRoom));
+
+router.post('/addRoom/:id', catchErrors(roomController.updateRoom));
+router.get('/rooms/:id/edit', catchErrors(roomController.editRoom));
+
+router.get('/users', catchErrors(userController.getUsers));
+router.post('/addUser', catchErrors(userController.createUser));
+
+router.post('/addUser/:id', catchErrors(userController.updateUser));
+router.get('/users/:id/edit', catchErrors(userController.editUser));
+
 
 module.exports = router;
