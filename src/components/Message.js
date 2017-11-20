@@ -10,7 +10,7 @@ class Message extends Component {
   render() {
     return (
       <div className="message">
-        <h3>{this.props.userId}</h3>
+        <h3>{this.props.userid}</h3>
         <span dangerouslySetInnerHTML={ this.rawMarkup() } />
       </div>
     )

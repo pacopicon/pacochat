@@ -8,10 +8,17 @@ class MessageList extends Component {
     this.renderMessages = this.renderMessages.bind(this)
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     data: this.props.data
-  //   })
+  // Original solution (works)
+
+  // renderMessages(messages) {
+  //   console.log("messages = ", messages)
+  //   if (typeof messages !== 'undefined') {
+  //     return (
+  //     <div>
+  //     { messages.map(message => <div key={ message._id } userid={ message.userId }>{ message.body }</div>) }
+  //     </div>
+  //     )
+  //   }
   // }
 
   renderMessages(messages) {
@@ -19,17 +26,11 @@ class MessageList extends Component {
     if (typeof messages !== 'undefined') {
       return (
       <div>
-      { messages.map(message => <div key={ message._id } userId={ message.userId }>{ message.body }</div>) }
+      { messages.map(message => <Message userId={ message.userId } key={ message['_id'] }>{ message.body }</Message>) }
       </div>
       )
     }
   }
-
-  // renderMessages(data) {
-  //   data.map(message => {
-  //     console.log(`message = ${message}`)
-  //   })
-  // }
 
   render() {
     var { messages } = this.props
@@ -42,10 +43,11 @@ class MessageList extends Component {
     )
   }
 
+// Don't do this, it does not work.  It will through a TypeError: messages.map is not a function
   // render() {
-  //   var { data } = this.props.data
-  //   console.log("data in  MessageList: ", data)
-  //   let messageNodes = data.map(message => {
+  //   var { messages } = this.props
+  //   console.log("data in  MessageList: ", messages)
+  //   let messageNodes = messages.map(message => {
   //     return (
   //       <Message userId={ message.userId } key={ message['_id'] }>
   //         { message.body }
@@ -63,3 +65,8 @@ class MessageList extends Component {
 }
 
 export default MessageList;
+
+// Some takeAways regarding rendering data from a localhost API:
+// -- When looping over Array elements with Map, make sure to expose the child object that contains those elements
+// -- Render the Mapped elements within Render() only through a separate Rendering function called within Render()
+// -- Within that rendering function, wrap the Mapping function within a conditional that checks to see that typeof array is not "undefined" | if (array !== "undefined") | 
