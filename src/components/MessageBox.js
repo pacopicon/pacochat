@@ -8,7 +8,7 @@ import '../styles/main.css'
 class MessageBox extends Component {
   constructor(props) {
     super(props)
-    this.state = { data: [] }
+    this.state = { data: [], loading: false }
     this.loadMessagesFromServer = this.loadMessagesFromServer.bind(this)
     this.handleMessageSubmit = this.handleMessageSubmit.bind(this)
   }
@@ -25,44 +25,48 @@ class MessageBox extends Component {
       console.log(`called ${GETmessages} `);
     })
     .then(json => {
-      this.setState({ data: json })
+      this.setState({ data: json, loading: false })
     })
     .catch(error => {
       console.log(`failed to fetch from ${GETmessages}`)
-      this.setState({ data: [] })
     })
   }
 
   // scoped as onMessageSubmit when passed to props:
   handleMessageSubmit(message) {
-    const { GETmessages, POSTmessages } = this.props
-    // axios.post(url, message)
-    // .then(res => {
-    //   this.loadMessagesFromServer()
-    // })
-    // .catch(err => {
-    //   console.error(err)
-    // })
-
-    var myHeaders = new Headers()
-    var init = {
-      method: 'POST',
-      headers: myHeaders,
-      cache: 'default',
-      body: message
-    }
-
-    fetch(POSTmessages, init)
-    .then(response => {
-      return response.json()
+    this.setState({
+      loading: true
     })
-    .then(json => {
-      console.log(`${json} POSTed to ${POSTmessages}`);
+    const { POSTmessages } = this.props
+    axios.post(POSTmessages, message)
+    .then(res => {
+      console.log(`${res.json()} POSTed to ${POSTmessages}`);
       this.loadMessagesFromServer()
     })
-    .catch(error => {
-      console.log(`failed to POST to ${POSTmessages}`)
+    .catch(err => {
+      console.error(err)
     })
+
+    // var myHeaders = new Headers()
+    // var init = {
+    //   method: 'POST',
+    //   headers: myHeaders,
+    //   cache: 'default',
+    //   body: message
+    // }
+
+    // fetch(POSTmessages, init)
+    // .then(response => {
+    //   console.log(`${response.json()} POSTed to ${POSTmessages}`);
+    //   return response.json()
+    // })
+    // .then(json => {
+    //   console.log(`${json} POSTed to ${POSTmessages}`);
+    //   this.loadMessagesFromServer()
+    // })
+    // .catch(error => {
+    //   console.log(`failed to POST to ${POSTmessages}`)
+    // })
 
   }
 
@@ -90,14 +94,14 @@ class MessageBox extends Component {
   // <MessageList data={ data }/>
 
   render() {
-    const { data } = this.state
+    const { data, loading } = this.state
     console.log("data.messages in MessageBox: ", data.messages);
     return (
       <div className="MessageBox">
         <h2>Messages:</h2>
-      <MessageList messages={ data.messages }/>
+      <MessageList messages={ data.messages } />
       
-      <MessageForm onMessageSubmit={ this.handleMessageSubmit } />
+      <MessageForm handleMessageSubmit={ this.handleMessageSubmit } loading={loading} />
       </div>
     )
   }

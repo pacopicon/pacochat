@@ -3,18 +3,29 @@ import '../styles/main.css';
 import marked from 'marked';
 
 class Message extends Component {
-  rawMarkup() {
-    let rawMarkup = marked(this.props.children.toString());
-    return { __html: rawMarkup };
+  constructor(props) {
+    super(props)
+    this.renderMessage = this.renderMessage.bind(this)
   }
-  render() {
+
+renderMessage(message) {
+  return (
+      <div className="message">
+        <h3>{ message.name } said:</h3>
+        <span>{ message.body }</span>
+      </div>
+    )
+}
+
+render() {
+  var { message } = this.props
     return (
       <div className="message">
-        <h3>{this.props.userid}</h3>
-        <span dangerouslySetInnerHTML={ this.rawMarkup() } />
+        {this.renderMessage(message)}
       </div>
     )
   }
+
 }
 
 export default Message;

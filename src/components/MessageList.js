@@ -21,12 +21,23 @@ class MessageList extends Component {
   //   }
   // }
 
+  // renderMessages(messages) {
+  //   console.log("messages = ", messages)
+  //   if (typeof messages !== 'undefined') {
+  //     return (
+  //     <div>
+  //     { messages.map(message => <Message userId={ message.userId } key={ message['_id'] }>{ message.body }</Message>) }
+  //     </div>
+  //     )
+  //   }
+  // }
+
   renderMessages(messages) {
     console.log("messages = ", messages)
     if (typeof messages !== 'undefined') {
       return (
       <div>
-      { messages.map(message => <Message userId={ message.userId } key={ message['_id'] }>{ message.body }</Message>) }
+      { messages.map(message => <Message message={ message } key={ message['_id'] }></Message>) }
       </div>
       )
     }
@@ -43,7 +54,7 @@ class MessageList extends Component {
     )
   }
 
-// Don't do this, it does not work.  It will through a TypeError: messages.map is not a function
+// Don't do this, it does not work.  It will result in a TypeError: messages.map is not a function
   // render() {
   //   var { messages } = this.props
   //   console.log("data in  MessageList: ", messages)
