@@ -8,17 +8,16 @@ const messageSchema = new mongoose.Schema({
   body: {
     type: String,
     trim: true,
-    required: 'Enter a message',
-
+    // required: 'Enter a message',
   },
   userName: {
     type: String,
     trim: true,
-    required: 'this message needs a name',
+    // required: 'this message needs a name',
   },
   userId: {
     type: String,
-    default: uuidv4(),
+    // default: uuidv4(),
   },
   date: {
     type: Date,

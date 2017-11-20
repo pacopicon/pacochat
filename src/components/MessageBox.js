@@ -18,22 +18,51 @@ class MessageBox extends Component {
     //   .then(res => {
     //     this.setState({ data: res.data })
     //   })
-    const { url } = this.props
-    fetch(url)
+    const { GETmessages } = this.props
+    fetch(GETmessages)
     .then(response => {
       return response.json()
-      console.log(`called ${url} `);
+      console.log(`called ${GETmessages} `);
     })
     .then(json => {
       this.setState({ data: json })
     })
     .catch(error => {
-      console.log(`failed to fetch from ${url}`)
+      console.log(`failed to fetch from ${GETmessages}`)
       this.setState({ data: [] })
     })
   }
 
+  // scoped as onMessageSubmit when passed to props:
   handleMessageSubmit(message) {
+    const { GETmessages, POSTmessages } = this.props
+    // axios.post(url, message)
+    // .then(res => {
+    //   this.loadMessagesFromServer()
+    // })
+    // .catch(err => {
+    //   console.error(err)
+    // })
+
+    var myHeaders = new Headers()
+    var init = {
+      method: 'POST',
+      headers: myHeaders,
+      cache: 'default',
+      body: message
+    }
+
+    fetch(POSTmessages, init)
+    .then(response => {
+      return response.json()
+    })
+    .then(json => {
+      console.log(`${json} POSTed to ${POSTmessages}`);
+      this.loadMessagesFromServer()
+    })
+    .catch(error => {
+      console.log(`failed to POST to ${POSTmessages}`)
+    })
 
   }
 

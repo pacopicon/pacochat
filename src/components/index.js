@@ -7,7 +7,8 @@ import registerServiceWorker from '../registerServiceWorker'
 
 ReactDOM.render(
 	<MessageBox 	
-		url='http://localhost:7777/messages' 
+		GETmessages='http://localhost:7777/messages'
+		POSTmessages='http://localhost:7777/addMessage' 
 		pollInterval={2000} 
 	/>, document.getElementById('root')
 )
