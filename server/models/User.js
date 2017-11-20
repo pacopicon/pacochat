@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: 'Enter a name',
-
   },
   userId: {
     type: String,
