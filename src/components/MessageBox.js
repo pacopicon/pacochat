@@ -13,21 +13,24 @@ class MessageBox extends Component {
   }
 
   loadMessagesFromServer() {
+    // Axios alternative:
     // axios.get(this.props.url)
     //   .then(res => {
     //     this.setState({ data: res.data })
     //   })
-    const { GETmessages } = this.props
-    fetch(GETmessages)
+
+    // Fetch Alternative (for GET, fetch works just fine):
+    const { GETurl } = this.props
+    fetch(GETurl)
     .then(response => {
       return response.json()
-      console.log(`called ${GETmessages} `);
+      console.log(`called ${GETurl} `);
     })
     .then(json => {
       this.setState({ data: json, loading: false })
     })
     .catch(error => {
-      console.log(`failed to fetch from ${GETmessages}`)
+      console.log(`failed to fetch from ${GETurl}`)
     })
   }
 
@@ -36,17 +39,37 @@ class MessageBox extends Component {
     this.setState({
       loading: true
     })
-    const { POSTmessages } = this.props
+    const { POSTurl } = this.props
     console.log("message within handleMessageSubmit: ", message)
+    let messages = this.state.data
+    let newMessages = [...messages, message]
 
-    axios.post(POSTmessages, message)
+    axios.post(POSTurl, message)
     .then(res => {
-      console.log(`${res.json()} POSTed to ${POSTmessages}`);
-      this.loadMessagesFromServer()
+      console.log(`${res.json()} POSTed to ${POSTurl}`);
+      // this.loadMessagesFromServer()  // this isn't absoluntely necessary
+      this.setState({ data: newMessages }) // this isn't absoluntely necessary
     })
     .catch(err => {
-      console.error(err)
+      console.error(err) 
+      this.setState({ data: messages }) // this isn't absoluntely necessary
     })
+
+    // Alternative setup:
+
+    // handleCommentSubmit(message) {
+    //   let messages = this.state.data;
+    //   message._id = Date.now();
+    //   let newMessages = [...messages, message]
+    //   this.setState({ data: newMessages });
+    //   axios.post(this.props.url, message)
+    //     .catch(err => {
+    //       console.error(err);
+    //       this.setState({ data: comments });
+    //     });
+    // }
+
+    // With Fetch (it doesn't seem to work after many attempts):
 
     // var myHeaders = new Headers()
     // var init = {
@@ -61,17 +84,17 @@ class MessageBox extends Component {
     //   body: message
     // }
 
-    // fetch(POSTmessages, init)
+    // fetch(POSTurl, init)
     // .then(response => {
-    //   console.log(`${response.json()} POSTed to ${POSTmessages}`);
+    //   console.log(`${response.json()} POSTed to ${POSTurl}`);
     //   return response.json()
     // })
     // .then(json => {
-    //   console.log(`${json} POSTed to ${POSTmessages}`);
+    //   console.log(`${json} POSTed to ${POSTurl}`);
     //   this.loadMessagesFromServer()
     // })
     // .catch(error => {
-    //   console.log(`failed to POST to ${POSTmessages}`)
+    //   console.log(`failed to POST to ${POSTurl}`)
     // })
 
   }
@@ -80,24 +103,6 @@ class MessageBox extends Component {
     this.loadMessagesFromServer();
     setInterval(this.loadMessagesFromServer, this.props.pollInterval)
   }
-
-  // componentDidUpdate() {
-  //   this.loadMessagesFromServer();
-  //   setInterval(this.loadMessagesFromServer, this.props.pollInterval)
-  // }
-
-  // componentWillUpdate() {
-  //   this.loadMessagesFromServer();
-  //   setInterval(this.loadMessagesFromServer, this.props.pollInterval)
-  // }
-
-  // componentWillMount() {
-  //   this.loadMessagesFromServer();
-  //   setInterval(this.loadMessagesFromServer, this.props.pollInterval)
-  // }
-  
-  // <VessageList { ...data } />
-  // <MessageList data={ data }/>
 
   render() {
     const { data, loading } = this.state

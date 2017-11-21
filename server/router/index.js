@@ -21,6 +21,8 @@ router.post('/addMessage', catchErrors(messageController.createMessage));
 
 router.post('/addMessage/:id', catchErrors(messageController.updateMessage));
 router.get('/messages/:id/edit', catchErrors(messageController.editMessage));
+router.put('/messages/:message_id', catchErrors(messageController.updateMessage));
+router.delete('/messages/:message_id', catchErrors(messageController.deleteMessage));
 
 router.get('/rooms', catchErrors(roomController.getRooms));
 router.post('/addRoom', catchErrors(roomController.createRoom));

@@ -23,18 +23,61 @@ exports.editMessage = async (req, res) => {
 }
 // BTW, no harm if you tag a function as async if you're not really sure it needs it.
 
+// exports.updateMessage = async (req, res) => {
+//   // set the location data to be a point.
+//   // req.body.location.type = 'Point'
+//   // find and update the message
+//   const message = await Message.findOneAndUpdate({ _id: req.params.id }, req.body, {
+//     new: true, // return the new message instead of the old one
+//     // runValidators: true // the validatorss are those options inside messageSchema in message.js, such as {trim: true} and {required: 'Please enter a message name!'}.  We still want these options active when editing the message, otherwise one could edit out the name of the message.
+//   }).exec(); // this runs the query
+//   // res.redirect(`/messages/${message._id}/edit`);
+//   // findOneAndUpdate() is a MongoDB function that allows us to query a piece of data from the DB and update it in one fell swoop.
+//   // redirect user to message and tell her it worked
+// }
+
+
 exports.updateMessage = async (req, res) => {
   // set the location data to be a point.
   // req.body.location.type = 'Point'
   // find and update the message
-  const message = await Message.findOneAndUpdate({ _id: req.params.id }, req.body, {
-    new: true, // return the new message instead of the old one
-    runValidators: true // the validatorss are those options inside messageSchema in message.js, such as {trim: true} and {required: 'Please enter a message name!'}.  We still want these options active when editing the message, otherwise one could edit out the name of the message.
-  }).exec(); // this runs the query
-  // res.redirect(`/messages/${message._id}/edit`);
-  // findOneAndUpdate() is a MongoDB function that allows us to query a piece of data from the DB and update it in one fell swoop.
-  // redirect user to message and tell her it worked
+  await Message.findById(req.params.message_id, (err, message) => {
+    if (err) {
+      res.send(err)
+    } else {
+      (req.body.body) ? message.body = req.body.body : null;
+      (req.body.room) ? message.room = req.body.room : null;
+    }
+
+    message.save(err => {
+      if (err) {
+        res.send(err)
+      } else {
+        res.json({ message: "Message has been updated" })
+      }
+    })
+  })
 }
+
+// exports.deleteMessage = async (req, res) => {
+//   Message.remove({ _id: req.params.message_id }, (err, message) => {
+//     if (err) {
+//       res.send(err)
+//     } else {
+//       res.json({ message: "Message has been deleted" })
+//     }
+//   })
+// }
+
+// alternate way of writing:
+exports.deleteMessage = async (req, res) => {
+  Message.remove({ _id: req.params.message_id }, (err, message) => {
+    if (err) 
+      res.send(err);
+    res.json({ message: "Message has been deleted" })
+  })
+}
+
 
 // notes:
 // req (request) = data that goes into something from us
