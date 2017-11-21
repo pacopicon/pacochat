@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import MessageList from './MessageList'
-import VessageList from './VessageList'
 import MessageForm from './MessageForm'
 import axios from 'axios';
 import '../styles/main.css'
@@ -38,6 +37,8 @@ class MessageBox extends Component {
       loading: true
     })
     const { POSTmessages } = this.props
+    console.log("message within handleMessageSubmit: ", message)
+
     axios.post(POSTmessages, message)
     .then(res => {
       console.log(`${res.json()} POSTed to ${POSTmessages}`);
@@ -50,8 +51,13 @@ class MessageBox extends Component {
     // var myHeaders = new Headers()
     // var init = {
     //   method: 'POST',
-    //   headers: myHeaders,
-    //   cache: 'default',
+    //   // headers: myHeaders,
+    //   headers: {
+    //     "Content-type": "text/plain"
+    //   },
+    //   mode: 'no-cors',
+    //   // cache: 'default',
+    //   // body: JSON.stringify(message)
     //   body: message
     // }
 

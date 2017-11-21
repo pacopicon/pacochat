@@ -11,8 +11,7 @@ class Message extends Component {
 renderMessage(message) {
   return (
       <div className="message">
-        <h3>{ message.name } said:</h3>
-        <span>{ message.body }</span>
+        <b className="name">{ message.userName }</b>: { message.body }
       </div>
     )
 }

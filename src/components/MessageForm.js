@@ -12,41 +12,8 @@ class MessageForm extends Component {
       userId: uuidv4(), 
       room: ''
     };
-    // this.handleAuthorChange = this.handleAuthorChange.bind(this);
-    // this.handleBodyChange = this.handleBodyChange.bind(this);
-    // this.handleRoomChange = this.handleRoomChange.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  // handleAuthorChange(e) {
-  //   this.setState({ name: e.target.value });
-  // }
-
-  // handleBodyChange(e) {
-  //   this.setState({ body: e.target.value });
-  // }
-
-  // handleRoomChange(e) {
-  //   this.setState({ room: e.target.value });
-  // }
-
-  // handleRoomChange(e) {
-  //   // this.setState({ [e.target.]]: e.target.value });
-  // }
-
-  // handleSubmit(e) {
-  //   const { body, userName, userId, date, room } = this.state
-  //   e.preventDefault();
-  //   console.log(`${userId} said "${body}"`)
-    
-  //   if (!body) {
-  //     return
-  //   }
-  //   var message = { body, userName, userId, date, room }
-  //   this.props.onMessageSubmit(message)
-  //   this.setState(message)
-  // }
 
   handleSubmit() {
     if (!this._body.value) {

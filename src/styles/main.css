@@ -1,7 +1,31 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
+  /*font-family: 'Montserrat', sans-serif;*/
+  /*font-family: 'Indie Flower', cursive;*/
+  /*font-family: 'Inconsolata', monospace;*/
+  /*font-family: 'Quicksand', sans-serif;*/
+  /*font-family: 'Pacifico', cursive;*/
+  /*font-family: 'Questrial', sans-serif;*/
+  /*font-family: 'Rokkitt', serif;*/
+  /*font-family: 'Poiret One', cursive;*/
+  /*font-family: 'ABeeZee', sans-serif;*/
+  /*font-family: 'Righteous', cursive;*/
+  /*font-family: 'Cardo', serif;*/
+  /*font-family: 'Pontano Sans', sans-serif;*/
+  /*font-family: 'Sacramento', cursive;*/
+  /*font-family: 'Fredoka One', cursive;*/
+  /*font-family: 'Concert One', cursive;*/
+  /*font-family: 'Cabin Sketch', cursive;*/
+  font-family: 'Montserrat Alternates', sans-serif;
+  /*font-family: 'Grand Hotel', cursive;*/
+  /*font-family: 'Love Ya Like A Sister', cursive;*/
+  /*font-family: 'Fascinate Inline', cursive;*/
+  /*font-family: 'Text Me One', sans-serif;*/
+  /*font-family: 'Barrio', cursive;*/
+  /*font-family: 'Fascinate', cursive;*/
+  /*font-family: 'Baloo Da', cursive;*/
 }
 
 .App {
@@ -56,6 +80,11 @@ body {
   margin:10px;
   padding:3px 10px;
   font-size:.85rem;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 18px;
 }
  
 .messageForm {

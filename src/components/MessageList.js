@@ -18,11 +18,6 @@ class MessageList extends Component {
     messageList.scrollTop = messageList.scrollHeight
   }
 
-  // componentDidMount() {
-  //  var list = document.querySelector('.list')
-  //   list.scrollTop = list.scrollHeight
-  // }
-
   // componentWillMount() {
   //  var list = document.querySelector('.list')
   //   if (list) {
