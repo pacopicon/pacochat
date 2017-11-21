@@ -8,6 +8,28 @@ class MessageList extends Component {
     this.renderMessages = this.renderMessages.bind(this)
   }
 
+  componentWillUpdate() {
+    var messageList = document.querySelector('.messageList')
+    messageList.scrollTop = messageList.scrollHeight
+  }
+
+  componentDidUpdate() {
+   var messageList = document.querySelector('.messageList')
+    messageList.scrollTop = messageList.scrollHeight
+  }
+
+  // componentDidMount() {
+  //  var list = document.querySelector('.list')
+  //   list.scrollTop = list.scrollHeight
+  // }
+
+  // componentWillMount() {
+  //  var list = document.querySelector('.list')
+  //   if (list) {
+  //     list.scrollTop = list.scrollHeight
+  //   }
+  // }
+
   // Original solution (works)
 
   // renderMessages(messages) {
@@ -32,15 +54,25 @@ class MessageList extends Component {
   //   }
   // }
 
+  // renderMessages(messages) {
+  //   console.log("messages = ", messages)
+  //   if (typeof messages !== 'undefined') {
+  //     return (
+  //     <div className="list">
+  //     { messages.map(message => <Message message={ message } key={ message['_id'] }></Message>) }
+  //     </div>
+  //     )
+  //   }
+  // }
+
+// Refactor of the code immediately above:
   renderMessages(messages) {
     console.log("messages = ", messages)
-    if (typeof messages !== 'undefined') {
-      return (
-      <div>
-      { messages.map(message => <Message message={ message } key={ message['_id'] }></Message>) }
+    return (
+      <div className="list">
+        { typeof messages !== 'undefined' ? messages.map(message => <Message message={ message } key={ message['_id'] }></Message>) : <div></div> }
       </div>
-      )
-    }
+    )
   }
 
   render() {
