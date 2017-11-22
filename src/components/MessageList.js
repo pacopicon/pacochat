@@ -62,17 +62,26 @@ class MessageList extends Component {
 
 // Refactor of the code immediately above:
   renderMessages(messages) {
-    console.log("messages = ", messages)
+    // console.log("messages = ", messages)
     return (
       <div className="list">
-        { typeof messages !== 'undefined' ? messages.map(message => <Message message={ message } key={ message['_id'] }></Message>) : <div></div> }
+        { typeof messages !== 'undefined' 
+          ? messages.map(message => <Message 
+                                      message={ message } 
+                                      key={ message['_id'] }
+                                      uniqueId={ message['_id'] }
+                                      update={ this.props.update }
+                                      delete={ this.props.delete }>
+                                    </Message>) 
+          : <div></div> 
+        }
       </div>
     )
   }
 
   render() {
     var { messages } = this.props
-    console.log("messages in  MessageList: ", messages)
+    // console.log("messages in  MessageList: ", messages)
     
     return (
       <div className="messageList">

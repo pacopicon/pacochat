@@ -31,7 +31,7 @@ class MessageForm extends Component {
       room: this._room.value,
     }
     console.log(`${this._room.value} said "${this._body.value}"`)
-    this.props.handleMessageSubmit(message)
+    this.props.submit(message)
     this.setState(message)
     }
     
@@ -56,15 +56,18 @@ class MessageForm extends Component {
           className="messageFormText"
           ref={input => this._room = input} 
         />
-        <button
-          type='submit'
-          className="messageFormPost" 
-          value='Post'
-          onClick={this.handleSubmit}>post
-        </button>
+        
+        <input className="messageFormPost" type="submit" value="Submit" />
       </form>
     )
   }
 }
+
+// <button
+          // type='submit'
+          // className="messageFormPost" 
+          // value='Post'
+          // onClick={this.handleSubmit}>post
+        // </button>
 
 export default MessageForm;

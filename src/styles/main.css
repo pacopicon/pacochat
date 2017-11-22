@@ -125,16 +125,54 @@ body {
   letter-spacing:.055rem;
   border:none;
 }
+
+.message-deleted.hide-opacity {
+  opacity: 0;
+}
+
+.message-delteted {
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -ms-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  opacity: 1;
+}
  
 .updateLink {
   text-decoration:none;
-  padding-right:15px;
-  font-size:.7rem;
+  padding-left: 10px;
+  padding-right:10px;
+  font-size:1em;
+  color:#5FAD57;
+  display: none;
+  -webkit-transition: color 0.5s ease-in-out;
+  -moz-transition: color 0.5s ease-in-out;
+  -ms-transition: color 0.5s ease-in-out;
+  -o-transition: color 0.5s ease-in-out;
+}
+
+.updateLink:hover {
+  color: #378B2F;
+  -webkit-transition: color 0.5s ease-in-out;
+  -moz-transition: color 0.5s ease-in-out;
+  -ms-transition: color 0.5s ease-in-out;
+  -o-transition: color 0.5s ease-in-out;
 }
  
 .deleteLink {
   text-decoration:none;
-  padding-right:15px;
-  font-size:.7rem;
-  color:red;
+  font-size:1.3em;
+  color:#D46A6A;
+  -webkit-transition: color 0.5s ease-in-out;
+  -moz-transition: color 0.5s ease-in-out;
+  -ms-transition: color 0.5s ease-in-out;
+  -o-transition: color 0.5s ease-in-out;
+}
+
+.deleteLink:hover {
+  color:#AA3939;
+  -webkit-transition: color 0.5s ease-in-out;
+  -moz-transition: color 0.5s ease-in-out;
+  -ms-transition: color 0.5s ease-in-out;
+  -o-transition: color 0.5s ease-in-out;
 }
